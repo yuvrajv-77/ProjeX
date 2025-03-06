@@ -1,4 +1,5 @@
 import LandingPage from "./pages/LandingPage";
+import RootLayout from "./pages/RootLayout";
 import Showcase from "./pages/Showcase";
 import { ThemeProvider } from "@/components/theme-provider";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -6,12 +7,19 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <LandingPage />,
+      element: <RootLayout/>,
+      children:[
+        {
+          index:true,
+          element:<LandingPage/>
+        },
+        {
+          path:"/showcase",
+          element:<Showcase/>
+        }
+      ]
     },
-    {
-      path: "/showcase",
-      element: <Showcase />,
-    },
+    
   ]);
 
   return (
