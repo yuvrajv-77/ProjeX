@@ -1,7 +1,7 @@
 import { NumberTicker } from "@/components/magicui/number-ticker";
 import { TextAnimate } from "@/components/magicui/text-animate";
 import { TypingAnimation } from "@/components/magicui/typing-animation";
-import { ModeToggle } from "@/components/mode-toggle";
+
 import { Button } from "@/components/ui/button";
 import { Mail, MousePointer2, UserRoundPlus } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -10,19 +10,18 @@ import { motion } from "motion/react";
 import React from "react";
 import { Separator } from "@/components/ui/separator";
 import { BorderBeam } from "@/components/magicui/border-beam";
+import { ProjectCard } from "@/components/ProjectCard";
+import { projectList } from "@/lib/projectList";
 
 const Showcase = () => {
   const dev = "James Tangi";
   const devImg =
     "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
   return (
-    <main className=" h-screen mx-auto md:px-30 px-5 bg-background relative">
-      <div className="fixed bottom-10 right-10 ">
-        <ModeToggle />
-      </div>
+    <main className="  mx-auto md:px-30 px-5 bg-background relative">
 
-      <div className="flex borde border-green-400 flex-col-reverse  md:flex-row w-full my-13 md:my-30 gap-18 md:gap-0">
-        <section className="  md:w-1/2 flex flex-col items-center md:items-start justify-between gap-5 ">
+      <div className="flex  border-green-400 flex-col-reverse  md:flex-row w-full  md:my-30 gap-10 md:gap-0">
+        <section className="  md:w-1/2 flex flex-col items-center md:items-start justify-between gap-8 ">
           <span className="relative rounded-full">
             <img
               className="rounded-full size-20 object-cover"
@@ -96,23 +95,30 @@ const Showcase = () => {
       </div>
 
       {/* -----Projects---- */}
-      <div className="borde border-green-500">
-        <div className="borde border-red-500">
-          <Tabs defaultValue="projects" className=" md:mx-0 ">
-            <TabsList className="grid mx-auto md:mx-0 grid-cols-2 w-[300px]">
-              <TabsTrigger value="projects">Projects</TabsTrigger>
-              <TabsTrigger value="about">About</TabsTrigger>
-            </TabsList>
-            <Separator className="my-4" />
-            <TabsContent value="projects" className="">
-              Projects array
-            </TabsContent>
-            <TabsContent value="about" className="">
-              About
-            </TabsContent>
-          </Tabs>
-        </div>
+
+      <Separator className=" hidden md:block" />
+      <div className=" h-full my-20 md:my-10">
+        <Tabs defaultValue="projects" className=" md:mx-0 ">
+          <TabsList className="grid mx-auto md:mx-0 grid-cols-2 w-[300px]">
+            <TabsTrigger value="projects">Projects</TabsTrigger>
+            <TabsTrigger value="about">About</TabsTrigger>
+          </TabsList>
+          <TabsContent value="projects" className="">
+
+
+            <ul className="my-10 grid grid-cols-1 sm:grid-cols-2 gap-14 md:grid-cols-3 lg:gap-10 xl:max-h-[34rem] ">
+              {projectList.map((project) => (
+                <ProjectCard project={project} key={project.id}/>
+              ))}
+            </ul>
+
+          </TabsContent>
+          <TabsContent value="about" className="">
+            About
+          </TabsContent>
+        </Tabs>
       </div>
+
     </main>
   );
 };

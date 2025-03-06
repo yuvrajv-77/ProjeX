@@ -1,15 +1,11 @@
 import React from 'react'
 import { Button } from './ui/button'
 import { Link } from 'react-router-dom'
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
+import { Avatar, AvatarImage } from './ui/avatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from './ui/dropdown-menu'
-import { motion, AnimatePresence } from "framer-motion";
 import {
     Sheet,
     SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
 
@@ -24,7 +20,7 @@ const Navbar = () => {
 
                     {/* ----- Hamburger Menu for mobile screen ------ */}
                     <Sheet >
-                        <SheetTrigger>
+                        <SheetTrigger className='md:hidden'>
                             <button className='flex flex-col justify-between items-start gap-3 md:hidden' >
                                 <span className={`bg-foreground h-[2.6px] w-7 rounded-2xl `}></span>
                                 <span className={`bg-foreground h-[2.5px] w-4 rounded-2xl `}></span>
@@ -60,8 +56,8 @@ const Navbar = () => {
                     </Sheet>
 
                     <h1 className='text-3xl font-light'>Proje<span className='font-extrabold '>X</span></h1>
-
                     {/* ----- Desktop Menu ------  */}
+
                     <ul className='hidden md:flex items-center gap-15'>
                         <Link to={'/homepage'}>
                             <li className='font-semibold text-lg hover:cursor-pointer hover:underline'>Home</li>
@@ -69,7 +65,7 @@ const Navbar = () => {
                         <Link to={'/homepage'}>
                             <li className='font-semibold text-lg hover:cursor-pointer hover:underline'>Project</li>
                         </Link>
-                        <Link to={'/homepage'}>
+                        <Link to={'/showcase'}>
                             <li className='font-semibold text-lg hover:cursor-pointer hover:underline'>Showcase</li>
                         </Link>
                         <Link to={'/homepage'}>

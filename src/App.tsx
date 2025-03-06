@@ -1,3 +1,4 @@
+import HomePage from "./pages/HomePage";
 import LandingPage from "./pages/LandingPage";
 import RootLayout from "./pages/RootLayout";
 import Showcase from "./pages/Showcase";
@@ -11,7 +12,7 @@ function App() {
       children:[
         {
           index:true,
-          element:<LandingPage/>
+          element:<HomePage/>
         },
         {
           path:"/showcase",
