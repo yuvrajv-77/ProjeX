@@ -2,9 +2,13 @@
 
 import { Box, Eye, Heart, Lock, Search, Settings, Sparkles } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
+import { useAuth } from "@/context/authContext";
 
 export function ProjectCard({ project }: any) {
+    const { user, loading, session } = useAuth();
+
+
     return (
         <li className={`min-h-[14rem] list-none group  `} key={project.id}>
             <div className="relative h-full rounded-3xl">

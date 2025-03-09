@@ -1,6 +1,6 @@
 
-import { ProjectCard } from '@/components/ProjectCard'
-import ProjectOfWeek from '@/components/ProjectOfWeek'
+import { ProjectCard } from '@/components/project/ProjectCard'
+import ProjectOfWeek from '@/components/project/ProjectOfWeek'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { projectList } from '@/lib/projectList'
 
@@ -18,7 +18,7 @@ const HomePage = () => {
                 <ul className="my-10 grid grid-cols-1 sm:grid-cols-2 gap-14 md:grid-cols-3 lg:gap-10 xl:max-h-[34rem] ">
                     {projectList.map((project) => (
                         <div>
-                            <ProjectCard project={project} key={project.id} />
+                            <ProjectCard project={project} />
                             <div className='flex items-center gap-2 mt-3'>
                                 <Avatar className='size-6'>
                                     <AvatarImage src={project.author.avatar} />

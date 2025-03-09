@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { use, useEffect } from 'react'
 import { MagicCard } from '@/components/magicui/magic-card'
 import { ShineBorder } from '@/components/magicui/shine-border'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
@@ -6,11 +6,21 @@ import { Button } from '@/components/ui/button'
 import { GlowingEffect } from '@/components/ui/glowing-effect'
 import { Heart } from 'lucide-react'
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
-import { HoverBorderGradient } from './ui/hover-border-gradient'
+import { HoverBorderGradient } from '../ui/hover-border-gradient'
+import { getCurrentUser, signUp } from '@/services/authService'
+import { log } from 'console'
 
 
 
 const ProjectOfWeek = () => {
+   
+    // const signuser = async () => {
+    //     await signUp('reddy32@gmail.com', 'red1234', 'Vladimir');
+    // }
+    // useEffect(() => {
+    //     signuser();
+    //     console.log("current User: ", getCurrentUser());
+    // },[])
     return (
         <div className=' md:w-[80%] w-full mx-auto my-10  relative'>
             <HoverBorderGradient as={'div'} className='p-9 rounded-2xl bg-background text-foreground'>
@@ -29,7 +39,7 @@ const ProjectOfWeek = () => {
                 </section>
                 <section className=' flex flex-col justify-between gap-3 '>
                     <div className='space-y-3'>
-                        <h2 className='text-2xl font-semibold'>AI-Powered Code Assistant</h2>
+                        <h2 className='text-2xl font-semibold'>Projex - A Projects Showcasing Platform</h2>
                         <p className='text-gray-500 dark:text-gray-300 text-lg'>A revolutionary tool that helps developers write better code faster using advanced AI models and machine learning techniques.</p>
                         <ul className='flex flex-wrap gap-2'>
                             <li>React</li>
@@ -42,7 +52,7 @@ const ProjectOfWeek = () => {
                             <Avatar>
                                 <AvatarImage src="https://github.com/shadcn.png" />
                             </Avatar>
-                            <p>Arjun Kanungo</p>
+                            <p>Osama Bin Laden</p>
                         </span>
                         <div className='flex gap-2 items-center'>
                             <Button variant={'ghost'}><Heart /></Button>

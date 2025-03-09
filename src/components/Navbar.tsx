@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from './ui/button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Avatar, AvatarImage } from './ui/avatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from './ui/dropdown-menu'
 import {
@@ -8,10 +8,14 @@ import {
     SheetContent,
     SheetTrigger,
 } from "@/components/ui/sheet"
+import Brand from './Brand'
+import { useAuth } from '@/context/authContext'
+import { logout } from '@/services/authService'
 
 
 const Navbar = () => {
-
+    const navigate = useNavigate();
+    const { user, loading, session } = useAuth();
 
     return (
         <>
@@ -27,11 +31,11 @@ const Navbar = () => {
                             </button>
                         </SheetTrigger>
                         <SheetContent side='left' className='md:hidden'>
-
+                            {/* ---mobile menu---- */}
                             <ul className='flex items-center flex-col my-auto gap-15'>
                                 <Link to={'/homepage'}>
                                     <li>
-                                        <h1 className='text-3xl text-center font-light'>Proje<span className='font-extrabold '>X</span></h1>
+                                        <h1 className='text-2xl font-light projex flex items-center'>Proje<span className='font-extrabold text-3xl '>X</span></h1>
                                     </li>
                                 </Link>
                                 <Link to={'/homepage'}>
@@ -55,38 +59,46 @@ const Navbar = () => {
                         </SheetContent>
                     </Sheet>
 
-                    <h1 className='text-3xl font-light'>Proje<span className='font-extrabold '>X</span></h1>
+                    <Brand />
                     {/* ----- Desktop Menu ------  */}
 
-                    <ul className='hidden md:flex items-center gap-15'>
+                    <ul className='hidden md:flex items-center gap-15 font-'>
                         <Link to={'/homepage'}>
-                            <li className='font-semibold text-lg hover:cursor-pointer hover:underline'>Home</li>
+                            <li className='text-lg hover:cursor-pointer hover:underline'>Home</li>
                         </Link>
                         <Link to={'/homepage'}>
-                            <li className='font-semibold text-lg hover:cursor-pointer hover:underline'>Project</li>
+                            <li className=' text-lg hover:cursor-pointer hover:underline'>Project</li>
                         </Link>
                         <Link to={'/showcase'}>
-                            <li className='font-semibold text-lg hover:cursor-pointer hover:underline'>Showcase</li>
+                            <li className=' text-lg hover:cursor-pointer hover:underline'>Showcase</li>
                         </Link>
                         <Link to={'/homepage'}>
-                            <li className='font-semibold text-lg hover:cursor-pointer hover:underline'>About</li>
+                            <li className=' text-lg hover:cursor-pointer hover:underline'>About</li>
                         </Link>
                     </ul>
 
                     <div className='flex items-center justify-end gap-5'>
-                        <Button>Login</Button>
-                        <DropdownMenu>
-                            <DropdownMenuTrigger>
-                                <Avatar className='w-12 h-12'>
-                                    <AvatarImage className='' src="https://github.com/shadcn.png" />
-                                </Avatar>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent>
-                                <DropdownMenuLabel className='font-bold'>Yuvraj Verma</DropdownMenuLabel>
-                                <DropdownMenuItem>Profile</DropdownMenuItem>
-                                <DropdownMenuItem>Logout</DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+                        {
+                            !loading && !user && <Button onClick={() => navigate('/getstarted')}>Sign Up</Button>
+                        }
+
+                        {
+                            user &&
+                            <DropdownMenu>
+                                <DropdownMenuTrigger className='flex items-center gap-2'>
+                                    <Avatar className='w-12 h-12'>
+                                        <AvatarImage className='' src={user?.user_metadata?.avatar_url} />
+                                    </Avatar>
+                                    <p className='hidden sm:block'>{user?.user_metadata?.name}</p>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent>
+                                    <DropdownMenuLabel className='font-bold'>{user?.user_metadata?.name}</DropdownMenuLabel>
+                                    <DropdownMenuItem>Profile</DropdownMenuItem>
+                                    <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        }
+
                     </div>
 
 
