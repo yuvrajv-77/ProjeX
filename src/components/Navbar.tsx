@@ -123,8 +123,6 @@ const Navbar = () => {
                 </nav>
             </header>
 
-
-
         </>
     )
 }
