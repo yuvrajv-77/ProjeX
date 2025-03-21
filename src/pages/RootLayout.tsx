@@ -13,9 +13,9 @@ const RootLayout = () => {
     <div className=''>
       <Navbar />
       <Outlet />
-      <div className="fixed bottom-10 right-10 ">
+      {/* <div className="fixed bottom-10 right-10 ">
         <ModeToggle />
-      </div>
+      </div> */}
      
 
     </div>

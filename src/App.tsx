@@ -6,6 +6,8 @@ import RootLayout from "./pages/RootLayout";
 import Showcase from "./pages/Showcase";
 import { ThemeProvider } from "@/components/theme-provider";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Profile from "./pages/Profile";
+import ProjectPage from "./pages/ProjectPage";
 function App() {
   const router = createBrowserRouter([
     {
@@ -17,6 +19,14 @@ function App() {
           element: <HomePage />
         },
 
+        {
+          path: "/profile",
+          element: <Profile />
+        },
+        {
+          path: "/project",
+          element: <ProjectPage />
+        },
         {
           path: "/showcase",
           element: <Showcase />

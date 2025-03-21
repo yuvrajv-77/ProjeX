@@ -198,7 +198,7 @@ export default function Authentication() {
                                         <div className="space-y-2">
                                             <Label htmlFor="name">Name</Label>
                                             <div className='relative'>
-                                                <Mail className='absolute top-3.5 left-3' strokeWidth={1} />
+                                                <Mail className='absolute top-3.5 left-3' strokeWidth={1.5} />
                                                 <Input
                                                     id="name"
                                                     type="text"
@@ -215,7 +215,7 @@ export default function Authentication() {
                                         <div className="space-y-2">
                                             <Label htmlFor="signup-email">Email Address</Label>
                                             <div className='relative'>
-                                                <Mail className='absolute top-3.5 left-3' strokeWidth={1} />
+                                                <Mail className='absolute top-3.5 left-3' strokeWidth={1.5} />
                                                 <Input
                                                     id="signup-email"
                                                     type="email"
@@ -232,7 +232,7 @@ export default function Authentication() {
                                         <div className="space-y-2">
                                             <Label htmlFor="signup-password">Password</Label>
                                             <div className='relative'>
-                                                <Key className='absolute top-3.5 left-3' strokeWidth={1} />
+                                                <Key className='absolute top-3.5 left-3' strokeWidth={1.5} />
                                                 <Input
                                                     id="signup-password"
                                                     type={showPassword ? "text" : "password"}
