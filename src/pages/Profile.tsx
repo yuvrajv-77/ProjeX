@@ -3,7 +3,7 @@ import { TextAnimate } from "@/components/magicui/text-animate";
 import { TypingAnimation } from "@/components/magicui/typing-animation";
 
 import { Button } from "@/components/ui/button";
-import { Mail, MousePointer2, UserRoundPlus } from "lucide-react";
+import { Ellipsis, Mail, MousePointer2, UserRoundPlus } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Pointer } from "@/components/magicui/pointer";
 import { motion } from "motion/react";
@@ -21,7 +21,9 @@ const Profile = () => {
    const dev = user?.user_metadata?.name || "Developer";
    const devImg =
       "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
+
    const bio = " Looking for experienced designer you are at the right place"
+
    return (
       <main className="  mx-auto md:px-30 px-5 bg-background relative">
 
@@ -66,7 +68,7 @@ const Profile = () => {
                         value={1021}
                         className="whitespace-pre-wrap text- font-medium tracking-tighter text-black dark:text-white"
                      />
-                     <p> likes</p>
+                     <p> appreciations</p>
                   </span>
                </div>
 
@@ -83,6 +85,7 @@ const Profile = () => {
                      <Mail />
                      Message
                   </Button>
+                  <Button size={"icon"} variant={"secondary"} className="rounded-full w-13 h-13"><Ellipsis /></Button>
                </div>
             </section>
 
@@ -95,7 +98,7 @@ const Profile = () => {
                   />
                </div>
             </section>
-            <Pointer className="fill-blue-500"></Pointer>
+            {/* <Pointer className="fill-blue-500"></Pointer> */}
          </div>
 
          {/* -----Projects---- */}

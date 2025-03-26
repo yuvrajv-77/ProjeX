@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { Eye, EyeOff, Key, Mail, Vault } from 'lucide-react';
+import { Eye, EyeOff, Key, Mail, User, Vault } from 'lucide-react';
 import Brand from '@/components/Brand';
 import { ModeToggle } from '@/components/mode-toggle';
 import { login, signInWithGithub, signInWithGoogle, signUp } from "@/services/authService";
@@ -20,15 +20,15 @@ export default function Authentication() {
     const [emailError, setEmailError] = useState('');
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
-
+    const [username, setUsername] = useState('');
     const [name, setName] = useState('');
     const [signupEmail, setSignupEmail] = useState('');
     const [signupEmailError, setSignupEmailError] = useState('');
     const [signupPassword, setSignupPassword] = useState('');
     const [signupPasswordError, setSignupPasswordError] = useState('');
 
-    const [showSignupPassword , setShowSignupPassword ] = useState(false);
-    const [showPassword , setShowPassword ] = useState(false);
+    const [showSignupPassword, setShowSignupPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
 
     const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -64,7 +64,7 @@ export default function Authentication() {
                 navigate('/');
             } catch (error: any) {
                 setPasswordError(error.message);
-               
+
             }
         }
     };
@@ -75,10 +75,11 @@ export default function Authentication() {
 
         if (!passwordError) {
             try {
-                await signUp(signupEmail, signupPassword, name);
+                await signUp(signupEmail, signupPassword, name, username);
                 // await refreshUser();
                 navigate('/');
             } catch (error: any) {
+                console.log(error);
                 setSignupPasswordError(error.message);
             }
         }
@@ -98,8 +99,8 @@ export default function Authentication() {
         try {
             const result = await signInWithGoogle();
             // await refreshUser();
-            if (result){
-                
+            if (result) {
+
                 navigate('/');
                 console.log(result);
             }
@@ -206,7 +207,24 @@ export default function Authentication() {
                                                     value={name}
                                                     minLength={3}
                                                     onChange={(e) => {
-                                                        setName(e.target.value); 
+                                                        setName(e.target.value);
+                                                    }}
+                                                    className={`h-13 rounded-lg pl-12`}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="name">Username</Label>
+                                            <div className='relative'>
+                                                <User className='absolute top-3.5 left-3' strokeWidth={1.5} />
+                                                <Input
+                                                    id="name"
+                                                    type="text"
+                                                    placeholder="Create a username"
+                                                    value={username}
+                                                    minLength={5}
+                                                    onChange={(e) => {
+                                                        setUsername(e.target.value);
                                                     }}
                                                     className={`h-13 rounded-lg pl-12`}
                                                 />

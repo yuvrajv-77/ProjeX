@@ -11,7 +11,7 @@ const FloatingNavbar = ({ navItems }) => {
             <TooltipProvider>
                 <Tooltip>
                     <TooltipTrigger>
-                        <div className="h-15 w-15 bg-foreground hover:bg-violet-200 rounded-2xl flex items-center justify-center">
+                        <div className="h-15 w-15 bg-foreground hover:bg-violet-300 rounded-2xl flex items-center justify-center">
                             <ThumbsUp size={20} className=" stroke-background" />
                         </div>
                     </TooltipTrigger>

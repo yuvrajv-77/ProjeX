@@ -28,8 +28,8 @@ const Navbar = () => {
 
     return (
         <>
-            <header className='w-full bg-transparent backdrop-blur-3xl px-5 md:px-30'>
-                <nav className='flex items-center justify-between  py-4 '>
+            <header className='w-full bg-transparent backdrop-blur-3xl px-5 md:px-20'>
+                <nav className='flex items-center justify-between  py-2 '>
 
                     <div className='flex items-center gap-3'>
 
@@ -87,14 +87,18 @@ const Navbar = () => {
                         <Link to={'/project'}>
                             <li className=' text- hover:cursor-pointer hover:underline'>Project</li>
                         </Link>
+                        <Link to={'/team'}>
+                            <li className=' text- hover:cursor-pointer hover:underline'>Team</li>
+                        </Link>
                     </ul>
-
-                    <div className='relative hidden md:block w-full md:w-96'>
-                        <Search className='absolute left-3 top-1/2 -translate-y-1/2' strokeWidth={1} color='gray' />
-                        <Input className='border-none bg-accent pl-10' placeholder='Search By Inspiration' />
-                    </div>
-
-                    <div className='flex items-center justify-end gap-2'>
+                      <div className='relative hidden lg:flex-auto md:block mx-4 max-w-96'>
+                          <Search className='absolute left-3 top-1/2 -translate-y-1/2 z-10' strokeWidth={1} color='gray' />
+                          <Input 
+                              className='w-full border-none bg-accent pl-10 transition-all duration-300 focus:max-w-none' 
+                              placeholder='Search By Inspiration' 
+                          />
+                      </div>
+                    <div className='flex items-center justify-end gap-4'>
                         <ModeToggle />
                         {
                             !loading && !user && <Button size={'lg'} variant={'link'} onClick={() => navigate('/getstarted')}>Login</Button>
