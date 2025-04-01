@@ -107,17 +107,17 @@ const Profile = () => {
          <div className=" h-full my-20 md:my-10">
             <Tabs defaultValue="projects" className=" md:mx-0 ">
                <TabsList className="grid mx-auto md:mx-0 grid-cols-2 w-[300px]">
-                  <TabsTrigger value="projects">Showcases</TabsTrigger>
+                  <TabsTrigger value="projects">Projects</TabsTrigger>
                   <TabsTrigger value="about">About</TabsTrigger>
                </TabsList>
                <TabsContent value="projects" className="">
 
 
-                  <ul className="my-10 grid grid-cols-1 sm:grid-cols-2 gap-14 md:grid-cols-3 lg:gap-10 xl:max-h-[34rem] ">
+                  {/* <ul className="my-10 grid grid-cols-1 sm:grid-cols-2 gap-14 md:grid-cols-3 lg:gap-10 xl:max-h-[34rem] ">
                      {projectList.map((project) => (
                         <ProjectCard project={project} key={project.id} />
                      ))}
-                  </ul>
+                  </ul> */}
 
                </TabsContent>
                <TabsContent value="about" className="">

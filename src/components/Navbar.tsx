@@ -28,18 +28,18 @@ const Navbar = () => {
 
     return (
         <>
-            <header className='w-full bg-transparent backdrop-blur-3xl px-5 md:px-20'>
-                <nav className='flex items-center justify-between  py-2 '>
+            <header className=' border-b w-full bg-transparent backdrop-blur-3xl px-5 md:px-20'>
+                <nav className='flex items-center justify-between  py-3 '>
 
                     <div className='flex items-center gap-3'>
 
                         {/* ----- Hamburger Menu for mobile screen ------ */}
                         <Sheet >
-                            <SheetTrigger className='md:hidden'>
-                                <button className='flex flex-col justify-between items-start gap-3 md:hidden' >
+                            <SheetTrigger className="flex flex-col justify-between items-start gap-3 md:hidden">
+                                {/* <button className='flex flex-col justify-between items-start gap-3 md:hidden' > */}
                                     <span className={`bg-foreground h-[2.6px] w-7 rounded-2xl `}></span>
                                     <span className={`bg-foreground h-[2.5px] w-4 rounded-2xl `}></span>
-                                </button>
+                                {/* </button> */}
                             </SheetTrigger>
 
                             <SheetContent side='left' className='md:hidden'>
