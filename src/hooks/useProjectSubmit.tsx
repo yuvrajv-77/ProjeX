@@ -146,7 +146,7 @@ export const useProjectSubmit = (formData: ProjectFormData, setIsSubmitting: (va
       toast.success("Your project has been created successfully");
       
       // Navigate to project page or dashboard
-      navigate('/dashboard');
+      navigate('/profile');
       
     } catch (error) {
       console.error('Error submitting project:', error);

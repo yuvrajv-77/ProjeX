@@ -40,6 +40,8 @@ const HomePage = () => {
                     </div> */}
                 </div>
 
+                
+
                 <ul className="my-10 grid grid-cols-1 sm:grid-cols-2 gap-14 md:grid-cols-3 lg:gap-10 xl:max-h-[34rem] ">
                     {projects?.map((project) => (
                         <div>

@@ -304,8 +304,6 @@ const ProjectPage = () => {
                         </div>
                     </div>
 
-
-
                 </div>
 
             </div>

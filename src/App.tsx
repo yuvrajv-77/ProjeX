@@ -28,9 +28,8 @@ function App() {
           path: "/search",
           element:<ProjectSearch/>
         },
-
         {
-          path: "/profile",
+          path: "/profile/:userId",
           element: <Profile />
         },
         {
