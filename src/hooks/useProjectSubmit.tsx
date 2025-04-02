@@ -103,6 +103,7 @@ export const useProjectSubmit = (formData: ProjectFormData, setIsSubmitting: (va
         highlights: uploadedHighlights.length > 0 ? uploadedHighlights : undefined,
         elements: uploadedElements.length > 0 ? uploadedElements : undefined,
         likes: [],
+        tags: formData.tags.length > 0 ? formData.tags : undefined,
         created_at: new Date().toISOString()
       };
       

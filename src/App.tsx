@@ -13,6 +13,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import AddNewProject from "./pages/AddNewProject";
 import ProjectSearch from "./pages/SearchPage";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   const router = createBrowserRouter([
@@ -26,11 +27,15 @@ function App() {
         },
         {
           path: "/search",
-          element:<ProjectSearch/>
+          element: <ProjectSearch />
         },
         {
           path: "/profile/:userId",
           element: <Profile />
+        },
+        {
+          path: "/edit-profile",
+          element: <EditProfile />
         },
         {
           path: "/project/:slug",

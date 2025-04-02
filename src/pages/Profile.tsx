@@ -9,7 +9,6 @@ import React, { useEffect, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { BorderBeam } from "@/components/magicui/border-beam";
 import { ProjectCard } from "@/components/project/ProjectCard";
-import { projectList } from "@/lib/projectList";
 import { useAuth } from "@/context/authContext";
 import { useProjects } from "@/hooks/useProject";
 import { Project } from "@/types/projectTypes";
@@ -26,7 +25,7 @@ interface ProfileUser {
    linkedin_url?: string;
    github_url?: string;
    behance_url?: string;
-   dribble_url?: string;
+   dribbble_url?: string;
    email?: string;
 }
 
@@ -40,6 +39,7 @@ const Profile = () => {
    const [userProjects, setUserProjects] = useState<Project[]>([]);
    const [isLoading, setIsLoading] = useState(true);
    const [isCurrentUser, setIsCurrentUser] = useState(false);
+   const [totalLikes, setTotalLikes] = useState(0);
 
    // Fetch the profile user data
    useEffect(() => {
@@ -51,7 +51,7 @@ const Profile = () => {
                // If no userId provided, redirect to current user's profile
                if (user) {
                   navigate(`/profile/${user.id}`);
-                  return;
+                  return; // This early return can cause hook inconsistency
                }
             } else {
                // Fetch user by ID
@@ -82,6 +82,44 @@ const Profile = () => {
       fetchProfileUser();
    }, [userId, user, navigate]);
 
+   // Fetch project likes directly from the database
+   useEffect(() => {
+      const fetchProjectLikes = async () => {
+         if (profileUser) {
+            try {
+               // Fetch projects with their likes array
+               const { data, error } = await supabase
+                  .from('projects')
+                  .select('id, likes')
+                  .eq('user_id', profileUser.id);
+
+               if (error) {
+                  console.error('Error fetching project likes:', error);
+                  return;
+               }
+
+               if (data) {
+                  // Calculate total likes by summing the length of each likes array
+                  let likesCount = 0;
+                  data.forEach(project => {
+                     // Check if likes is an array and count its length
+                     if (Array.isArray(project.likes)) {
+                        likesCount += project.likes.length;
+                     }
+                  });
+                  
+                  setTotalLikes(likesCount);
+                  console.log('Total likes calculated:', likesCount, 'from', data.length, 'projects');
+               }
+            } catch (error) {
+               console.error('Error calculating likes:', error);
+            }
+         }
+      };
+
+      fetchProjectLikes();
+   }, [profileUser]);
+
    // Filter projects for the profile user
    useEffect(() => {
       if (allProjects && profileUser) {
@@ -101,6 +139,9 @@ const Profile = () => {
       );
    }
 
+   console.log("likes ",totalLikes);
+   
+
    if (!profileUser) {
       return (
          <div className="flex flex-col items-center justify-center h-screen">
@@ -115,7 +156,7 @@ const Profile = () => {
 
    const dev = profileUser.name || "Developer";
    const devImg = profileUser.avatar_url ||
-      "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
+      'https://github.com/shadcn.png';
    const bio = profileUser.bio || "Looking for experienced designer you are at the right place";
 
    return (
@@ -142,7 +183,7 @@ const Profile = () => {
                   {bio}
                </TextAnimate>
                <div className="flex gap-5 text-gray-500">
-                  <span className="inline-flex items-center gap-1 ">
+                  {/* <span className="inline-flex items-center gap-1 ">
                      <NumberTicker
                         value={243}
                         className="whitespace-pre-wrap text- font-medium tracking-tighter text-black dark:text-white"
@@ -155,10 +196,10 @@ const Profile = () => {
                         className="whitespace-pre-wrap text- font-medium tracking-tighter text-black dark:text-white"
                      />
                      <p> following</p>
-                  </span>
+                  </span> */}
                   <span className="inline-flex items-center gap-1">
                      <NumberTicker
-                        value={1021}
+                        value={totalLikes}
                         className="whitespace-pre-wrap text- font-medium tracking-tighter text-black dark:text-white"
                      />
                      <p> appreciations</p>
@@ -196,7 +237,7 @@ const Profile = () => {
                </div>
 
                {/* Social links */}
-               {(profileUser.linkedin_url || profileUser.github_url || profileUser.behance_url || profileUser.dribble_url) && (
+               {(profileUser.linkedin_url || profileUser.github_url || profileUser.behance_url || profileUser.dribbble_url) && (
                   <div className="flex gap-4 mt-2">
                      {profileUser.linkedin_url && (
                         <a href={profileUser.linkedin_url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700">
@@ -213,8 +254,8 @@ const Profile = () => {
                            Behance
                         </a>
                      )}
-                     {profileUser.dribble_url && (
-                        <a href={profileUser.dribble_url} target="_blank" rel="noopener noreferrer" className="text-pink-500 hover:text-pink-700">
+                     {profileUser.dribbble_url && (
+                        <a href={profileUser.dribbble_url} target="_blank" rel="noopener noreferrer" className="text-pink-500 hover:text-pink-700">
                            Dribbble
                         </a>
                      )}

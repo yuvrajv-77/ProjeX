@@ -30,6 +30,7 @@ export default function Authentication() {
     const [showSignupPassword, setShowSignupPassword] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
+    const [bio, setBio] = useState('');
 
     const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const validateEmail = (email: string) => {
@@ -75,7 +76,7 @@ export default function Authentication() {
 
         if (!passwordError) {
             try {
-                await signUp(signupEmail, signupPassword, name, username);
+                await signUp(signupEmail, signupPassword, name, bio );
                 // await refreshUser();
                 navigate('/');
             } catch (error: any) {
@@ -213,7 +214,7 @@ export default function Authentication() {
                                                 />
                                             </div>
                                         </div>
-                                        <div className="space-y-2">
+                                        {/* <div className="space-y-2">
                                             <Label htmlFor="name">Username</Label>
                                             <div className='relative'>
                                                 <User className='absolute top-3.5 left-3' strokeWidth={1.5} />
@@ -225,6 +226,23 @@ export default function Authentication() {
                                                     minLength={5}
                                                     onChange={(e) => {
                                                         setUsername(e.target.value);
+                                                    }}
+                                                    className={`h-13 rounded-lg pl-12`}
+                                                />
+                                            </div>
+                                        </div> */}
+                                        <div className="space-y-2">
+                                            <Label htmlFor="name">Bio</Label>
+                                            <div className='relative'>
+                                                <User className='absolute top-3.5 left-3' strokeWidth={1.5} />
+                                                <Input
+                                                    id="name"
+                                                    type="text"
+                                                    placeholder="Write a bio"
+                                                    value={bio}
+                                                    minLength={5}
+                                                    onChange={(e) => {
+                                                        setBio(e.target.value);
                                                     }}
                                                     className={`h-13 rounded-lg pl-12`}
                                                 />

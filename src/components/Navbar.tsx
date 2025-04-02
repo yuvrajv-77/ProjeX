@@ -74,7 +74,7 @@ const Navbar = () => {
                     </div>
                     {/* ----- Desktop Menu ------  */}
 
-                    <ul className='hidden md:flex items-center gap-10 font-'>
+                    {/* <ul className='hidden md:flex items-center gap-10 font-'>
                         <Link to={'/'}>
                             <li className='text- hover:cursor-pointer hover:underline'>Explore</li>
                         </Link>
@@ -90,7 +90,7 @@ const Navbar = () => {
                         <Link to={'/team'}>
                             <li className=' text- hover:cursor-pointer hover:underline'>Team</li>
                         </Link>
-                    </ul>
+                    </ul> */}
                       {/* <div className='relative hidden lg:flex-auto md:block mx-4 max-w-96'>
                           <Search className='absolute left-3 top-1/2 -translate-y-1/2 z-10' strokeWidth={1} color='gray' />
                           <Input 
@@ -117,7 +117,7 @@ const Navbar = () => {
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent>
                                     <DropdownMenuLabel className='font-bold'>{user?.user_metadata?.name}</DropdownMenuLabel>
-                                    <DropdownMenuItem>Profile</DropdownMenuItem>
+                                    <DropdownMenuItem onClick={() => navigate(`/profile/${user?.id}`)}>Profile</DropdownMenuItem>
                                     <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>

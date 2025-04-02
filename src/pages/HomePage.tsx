@@ -7,9 +7,11 @@ import { projectList } from '@/lib/projectList'
 import { log } from 'console'
 
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 const HomePage = () => {
 
+    const navigate = useNavigate();
     const { data: projects, isLoading, error } = useProjects();
     console.log('Projects:', projects);
 
@@ -46,12 +48,12 @@ const HomePage = () => {
                     {projects?.map((project) => (
                         <div>
                             <ProjectCard project={project} />
-                            <div className='flex items-center gap-2 mt-3'>
+                            <Link to={`/profile/${project.users.id}`} className='flex items-center gap-2 mt-3 cursor-pointer '>
                                 <Avatar className='size-6'>
                                     <AvatarImage src={project.users.avatar_url} />
                                 </Avatar>
                                 <p className='text-sm'>{project.users.name}</p>
-                            </div>
+                            </Link>
                         </div>
                     ))}
                 </ul>
