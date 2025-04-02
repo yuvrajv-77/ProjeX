@@ -43,6 +43,7 @@ export interface Project {
     slug: string;
     project_media: ProjectMedia[];
     elements?: Element[];
+    tags?: string[];
     users?: {
       name: string;
       avatar_url: string;

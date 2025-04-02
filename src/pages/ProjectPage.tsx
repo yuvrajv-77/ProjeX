@@ -28,7 +28,7 @@ const ProjectPage = () => {
     const [selectedFont, setSelectedFont] = useState(0);
     const [activeTab, setActiveTab] = useState('creator');
     const { data: project, isLoading, isError, error } = useProjectBySlug(slug);
-    const { isLiked, likeCount, toggleLike, isLikeLoading } = useProjectLike(project?.id);
+    // const { isLiked, likeCount, toggleLike, isLikeLoading } = useProjectLike(project?.id);
 
 
     // 2. Use useMemo for derived state to avoid recalculation
@@ -40,6 +40,7 @@ const ProjectPage = () => {
             Typography: [],
             Highlights: [],
             Elements: [],
+            Tags: [],
             visibleSections: ['creator']
         };
 
@@ -51,6 +52,8 @@ const ProjectPage = () => {
         const Typography = project.typography || [];
         const Highlights = project.highlights || [];
         const Elements = project.elements || [];
+        const Tags = project.tags || [];
+
 
 
         // Determine which sections are visible based on data
@@ -115,11 +118,11 @@ const ProjectPage = () => {
     }
 
     // Destructure for easier access
-    const { ProjectType, Tools, ColorPallete, Typography, Highlights, Elements, visibleSections } = projectData;
+    const { ProjectType, Tools, ColorPallete, Typography, Highlights, Elements, visibleSections,Tags } = projectData;
 
 
     return (
-        <main className="  mx-auto md:px-30 px-3 bg-background relative">
+        <main className="   mx-auto md:px-30 px-3 bg-background relative">
             <ScrollProgress className="top-[0px] " />
 
             <div className='my-15 md:my-30 '>
@@ -127,7 +130,10 @@ const ProjectPage = () => {
                 <div className='flex items-center gap-6 mt-30 mb-6 justify-center' id='creator'>
 
 
-                    {project?.github_url && <Github strokeWidth={1.5} className='stroke-muted-foreground hover:stroke-secondary-foreground' size={35} />}
+                    {project?.github_url &&
+                        <a href={project?.live_url} target='_blank' rel='noopener noreferrer'>
+                            <Github strokeWidth={1.5} className='stroke-muted-foreground hover:stroke-secondary-foreground' size={35} />
+                        </a>}
                     <Bookmark strokeWidth={1.5} className='stroke-muted-foreground hover:stroke-secondary-foreground' size={35} />
                     <Share strokeWidth={1.5} className='stroke-muted-foreground hover:stroke-secondary-foreground' size={35} />
                     <a href={project?.live_url} target='_blank' rel='noopener noreferrer'>
@@ -196,18 +202,12 @@ const ProjectPage = () => {
                         <div className='grid  grid-cols-1 md:grid-cols-2 gap-24 md:gap-10 items-center mt-14 md:mt-20'>
                             {project?.highlights?.map((highlight, index) => (
 
-                                <div key={index} className='flex flex-col gap-10'>
-                                    <div className='w-full h-[20rem] md:h-[27rem]'>
+                                <div key={index} className='flex flex-col gap-10 '>
+                                    <div className='w-full h-[20rem] md:h-[27rem] border rounded-2xl'>
                                         <img src={highlight?.imageUrl} className='rounded-xl w-full h-full object-cover' alt="" />
                                     </div>
-                                    <div className='space-y-4 md:space-y-10'>
-                                        <BoxReveal boxColor={"#7c3df1"} duration={1}>
-                                            <p className="text-4xl md:text-5xl text-start text-accent-foreground font-semibold">
-                                                {highlight.highlightText}<span className="text-[#7c3df1]">.</span>
-                                            </p>
-                                        </BoxReveal>
+                                    <h2 className="text-2xl font-medium">{highlight.highlightText}</h2>
 
-                                    </div>
                                 </div>
                             ))}
                         </div>
@@ -294,13 +294,16 @@ const ProjectPage = () => {
                         </div>
 
                         <div className='flex items-center justify-center flex-wrap gap-4'>
-                            <span className='py-3 px-4 border-foreground border rounded-full'>Mobile Design</span>
-                            <span className='py-3 px-4 border-foreground border rounded-full'>Responsive</span>
-                            <span className='py-3 px-4 border-foreground border rounded-full'>Responsive</span>
-                            <span className='py-3 px-4 border-foreground border rounded-full'>UI/UX</span>
-                            <span className='py-3 px-4 border-foreground border rounded-full'>Clean</span>
+                            {Tags && Tags.length > 0 ? (
+                                Tags.map((tag, index) => (
+                                    <span key={index} className='py-3 px-4 border-foreground border rounded-full'>{tag}</span>
+                                ))
+                            ) : (
+                                <span className='text-muted-foreground'>No tags added</span>
+                            )}
                         </div>
                     </div>
+
 
 
                 </div>

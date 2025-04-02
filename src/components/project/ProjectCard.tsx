@@ -4,13 +4,15 @@ import { Box, Eye, Heart, Lock, Search, Settings, Sparkles, ThumbsUp } from "luc
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { Button } from "../ui/button";
 import { useAuth } from "@/context/authContext";
+import { useNavigate } from "react-router-dom";
 
 export function ProjectCard({ project }: any) {
     const { user, loading, session } = useAuth();
+    const navigate = useNavigate();
 
 
     return (
-        <li className={`min-h-[14rem] list-none group  `} key={project.id}>
+        <li className={`min-h-[14rem] list-none group  `} onClick={() => {navigate(`/project/${project.slug}`) }} key={project.id}>
             <div className="relative h-full rounded-2xl">
                 <GlowingEffect
                     blur={1}

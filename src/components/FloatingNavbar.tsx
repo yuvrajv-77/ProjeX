@@ -8,23 +8,23 @@ import { useProjectLike } from '@/hooks/useProjectLike';
 
 const FloatingNavbar = ({ navItems, activeTab, setActiveTab, liveUrl, visibleSections = [], projectId }) => {
     // const { toast } = useToast();
-    
+
     // Use the project like hook
     const { isLiked, likeCount, toggleLike, isLikeLoading } = useProjectLike(projectId);
-    
+
     // Filter navItems to only show those that have corresponding sections on the page
     const filteredNavItems = navItems.filter(item => visibleSections.includes(item.id));
-    
+
     const handleNavClick = (id) => {
         setActiveTab(id);
-        
+
         // Scroll to the element with the matching ID
         const element = document.getElementById(id);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     };
-    
+
     const handleLikeClick = async () => {
         if (!isLikeLoading) {
             try {
@@ -39,29 +39,32 @@ const FloatingNavbar = ({ navItems, activeTab, setActiveTab, liveUrl, visibleSec
             }
         }
     };
-    
+
     return (
         <span className="z-20 border backdrop-blur-3xl bg-white/20 rounded-3xl p-2 flex items-center gap-2 shadow-xl fixed bottom-5 left-1/2 -translate-x-1/2">
             {/* Like Button */}
             <TooltipProvider>
                 <Tooltip>
                     <TooltipTrigger asChild>
-                        <button 
-                            onClick={handleLikeClick} 
+                        <button
+                            onClick={handleLikeClick}
                             disabled={isLikeLoading}
                             className="focus:outline-none"
                         >
                             <div className={cn(
-                                "h-15 w-15 rounded-2xl flex items-center justify-center relative transition-all duration-200",
-                                isLiked 
-                                    ? "bg-violet-500 hover:bg-violet-600" 
+                                "h-15 w-15 rounded-2xl flex items-center gap-1 justify-center relative transition-all duration-200",
+                                isLiked
+                                    ? "bg-violet-500 hover:bg-violet-600"
                                     : "bg-foreground hover:bg-violet-300",
                                 isLikeLoading && "opacity-70 cursor-not-allowed"
                             )}>
                                 <ThumbsUp size={20} className="stroke-background" />
-                                
-                               
-                                
+                                {isLiked &&
+                                    <p className='text-background'>{likeCount}</p>
+                                }
+
+
+
                             </div>
                         </button>
                     </TooltipTrigger>
@@ -92,9 +95,9 @@ const FloatingNavbar = ({ navItems, activeTab, setActiveTab, liveUrl, visibleSec
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger asChild>
-                            <a 
-                                href={liveUrl} 
-                                target="_blank" 
+                            <a
+                                href={liveUrl}
+                                target="_blank"
                                 rel="noopener noreferrer"
                                 className="focus:outline-none"
                             >
@@ -109,7 +112,7 @@ const FloatingNavbar = ({ navItems, activeTab, setActiveTab, liveUrl, visibleSec
                     </Tooltip>
                 </TooltipProvider>
             )}
-        </span> 
+        </span>
     )
 }
 

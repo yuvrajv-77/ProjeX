@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Trash, Upload } from 'lucide-react';
 import { HighlightForm } from '@/types/projectFormTypes';
 import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
 
 interface ProjectHighlightsProps {
   highlights: HighlightForm[];
@@ -49,7 +50,7 @@ export const ProjectHighlights = ({
     <div className='my-20'>
       <h1 className='text-3xl font-semibold'>Highlights</h1>
 
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-24 md:gap-x-8 md:gap-y-30 items-center mt-14 md:mt-20'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-24 md:gap-x-8 md:gap-y-30 items-center mt-14 md:mt-10'>
         {/* Highlight previews */}
         {highlights.map((highlight, index) => (
           <div key={index} className='flex flex-col gap-10 group relative'>
@@ -59,8 +60,9 @@ export const ProjectHighlights = ({
                 className='rounded-xl w-full h-full object-cover'
                 alt={highlight.highlightText || "Highlight preview"}
               />
-              <Textarea
+              <Input
                 placeholder='Enter Highlight Description'
+                type='text'
                 value={highlight.highlightText}
                 onChange={(e) => updateHighlightDescription(index, e.target.value)}
                 className="w-full text-lg mt-2 font-medium hover:ring-3 focus:outline-2 focus:outline-blue-400 rounded-md p-4 hover:ring-purple-200 min-h-[100px] resize-y"

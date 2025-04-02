@@ -5,3 +5,4 @@ export { ProjectHighlights } from './ProjectHighlights';
 export { ProjectTools } from './ProjectTools';
 export { ProjectColorPalette } from './ProjectColorPalette';
 export { ProjectTypography } from './ProjectTypography';
+export { default as ProjectTags } from './ProjectTags';

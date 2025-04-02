@@ -53,14 +53,38 @@ export const ProjectTypography = ({
     <div className='my-20'>
       <h1 className='text-3xl font-semibold mb-10'>Fonts Used</h1>
 
-      <div className='flex flex-col gap-6'>
+      <div className='flex items-center justify-between'>
+        
+
+        {/* Add new font */}
+        <div className='flex gap-4 items-center'>
+          <div className='flex-1 px-4 flex items-center border justify-center hover:ring-3 focus-within:outline-2 focus-within:outline-blue-400 rounded-xl hover:ring-purple-200'>
+            <input
+              type="text"
+              value={newFont}
+              onChange={(e) => setNewFont(e.target.value)}
+              placeholder='Enter font name (e.g., Roboto, Open Sans)'
+              className="w-full text-lg p-3 font-medium focus:outline-none"
+            />
+          </div>
+
+          <Button
+            onClick={addFont}
+            disabled={!newFont.trim()}
+            
+            className='flex items-center gap-2'
+          >
+            <Plus size={18} /> Add Font
+          </Button>
+        </div>
+
         {/* Display existing fonts */}
         {fonts.length > 0 && (
           <div className='flex flex-wrap gap-3'>
             {fonts.map((font, index) => (
-              <div key={index} className='relative group px-4 py-2 border rounded-lg hover:shadow-md transition-all flex items-center gap-2'>
+              <div key={index} className='relative bg-neutral-100 group px-4 py-2 rounded-lg  transition-all flex items-center gap-2'>
                 <h3
-                  className='text-lg font-medium'
+                  className='text-2xl font-medium'
                   style={{ fontFamily: `'${font}', sans-serif` }}
                 >
                   {font}
@@ -77,33 +101,9 @@ export const ProjectTypography = ({
             ))}
           </div>
         )}
-
-        {/* Add new font */}
-        <div className='flex gap-4 items-center'>
-          <div className='flex-1 px-4 flex items-center border justify-center hover:ring-3 focus-within:outline-2 focus-within:outline-blue-400 rounded-md hover:ring-purple-200'>
-            <Input
-              type="text"
-              value={newFont}
-              onChange={(e) => setNewFont(e.target.value)}
-              placeholder='Enter font name (e.g., Roboto, Open Sans)'
-              className="w-full text-lg p-3 font-medium focus:outline-none"
-            />
-          </div>
-
-          <Button
-            onClick={addFont}
-            disabled={!newFont.trim()}
-            className='flex items-center gap-2'
-          >
-            <Plus size={18} /> Add Font
-          </Button>
-        </div>
-
-        {/* Font usage tips */}
-        <div className='mt-2 text-sm text-gray-500'>
-          <p>Tips: Enter font names available on Google Fonts (e.g., Roboto, Lato, Open Sans, Montserrat)</p>
-        </div>
       </div>
+      <p className='mt-2 text-sm text-gray-500'>Tips: Enter font names available on Google Fonts (e.g., Roboto, Lato, Open Sans, Montserrat)</p>
+
     </div>
   );
 };

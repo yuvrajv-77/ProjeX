@@ -3,26 +3,40 @@ import { TextAnimate } from "@/components/magicui/text-animate";
 import { TypingAnimation } from "@/components/magicui/typing-animation";
 
 import { Button } from "@/components/ui/button";
-import { Ellipsis, Mail, MousePointer2, UserRoundPlus } from "lucide-react";
+import { Ellipsis, Loader2, Mail, MousePointer2, UserRoundPlus } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Pointer } from "@/components/magicui/pointer";
 import { motion } from "motion/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { BorderBeam } from "@/components/magicui/border-beam";
 import { ProjectCard } from "@/components/project/ProjectCard";
 import { projectList } from "@/lib/projectList";
 import { useAuth } from "@/context/authContext";
+import { useProjects } from "@/hooks/useProject";
+import { Project } from "@/types/projectTypes";
 
 const Profile = () => {
 
    const { user, loading, session } = useAuth();
+   const { data: allProjects, isLoading } = useProjects();
+   const [userProjects, setUserProjects] = useState<Project[]>([]);
 
    const dev = user?.user_metadata?.name || "Developer";
-   const devImg =
+   const devImg = user?.user_metadata?.avatar_url || 
       "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
 
-   const bio = " Looking for experienced designer you are at the right place"
+   const bio = user?.user_metadata?.bio || "Looking for experienced designer you are at the right place";
+
+   useEffect(() => {
+     // Filter projects to only show the current user's projects
+     if (allProjects && user) {
+       const filteredProjects = allProjects.filter(
+         (project) => project.user_id === user.id
+       );
+       setUserProjects(filteredProjects);
+     }
+   }, [allProjects, user]);
 
    return (
       <main className="  mx-auto md:px-30 px-5 bg-background relative">
@@ -113,11 +127,25 @@ const Profile = () => {
                <TabsContent value="projects" className="">
 
 
-                  {/* <ul className="my-10 grid grid-cols-1 sm:grid-cols-2 gap-14 md:grid-cols-3 lg:gap-10 xl:max-h-[34rem] ">
-                     {projectList.map((project) => (
-                        <ProjectCard project={project} key={project.id} />
-                     ))}
-                  </ul> */}
+               {isLoading ? (
+                     <div className="flex justify-center items-center h-40">
+                        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                        <p className="ml-2">Loading projects...</p>
+                     </div>
+                  ) : userProjects.length > 0 ? (
+                     <ul className="my-10 grid grid-cols-1 sm:grid-cols-2 gap-14 md:grid-cols-3 lg:gap-10 xl:max-h-[34rem]">
+                        {userProjects.map((project) => (
+                           <ProjectCard project={project} key={project.id} />
+                        ))}
+                     </ul>
+                  ) : (
+                     <div className="flex flex-col items-center justify-center h-40 gap-4">
+                        <p>No projects found</p>
+                        <Button variant="outline" asChild>
+                           <a href="/create-project">Create your first project</a>
+                        </Button>
+                     </div>
+                  )}
 
                </TabsContent>
                <TabsContent value="about" className="">

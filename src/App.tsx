@@ -12,6 +12,7 @@ import TeamPage from "./pages/TeamPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import AddNewProject from "./pages/AddNewProject";
+import ProjectSearch from "./pages/SearchPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -23,6 +24,10 @@ function App() {
           index: true,
           element: <HomePage />
         },
+        {
+          path: "/search",
+          element:<ProjectSearch/>
+        },
 
         {
           path: "/profile",
@@ -33,7 +38,7 @@ function App() {
           element: <ProjectPage />
         },
         {
-          path:"/add-new-project",
+          path: "/add-new-project",
           element: <AddNewProject />
         },
         {
@@ -53,13 +58,13 @@ function App() {
 
   return (
     <>
-     <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        <AuthProvider>
-          <RouterProvider router={router} />
-        </AuthProvider>
-      </ThemeProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+          <AuthProvider>
+            <RouterProvider router={router} />
+          </AuthProvider>
+        </ThemeProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </>
   );

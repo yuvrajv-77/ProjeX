@@ -24,6 +24,7 @@ export interface ProjectFormData {
   colorPalette: string[];
   selectedTools: TechStack[];
   fonts: string[];
+  tags: string[];
 }
 
 export interface FormErrors {

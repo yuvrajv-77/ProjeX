@@ -49,18 +49,18 @@ export const ProjectElements = ({
     <div className='my-20'>
       <h1 className='text-3xl font-semibold'>Elements</h1>
 
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-24 md:gap-x-8 md:gap-y-30 items-center mt-14 md:mt-20'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-24 md:gap-x-8 md:gap-y-30 items-center mt-14 md:mt-10'>
         {/* Element previews */}
         {elements.map((element, index) => (
           <div key={index} className='flex flex-col gap-10 group relative'>
-            <div className='w-full h-[20rem] md:h-[32rem] hover:brightness-90 transition-all duration-300'>
+            <div className='w-full h-[20rem] md:h-[27rem] hover:brightness-90 transition-all duration-300'>
               <img
                 src={element.imageUrl}
                 className='rounded-xl w-full h-full object-cover'
                 alt={element.elementText || "Element preview"}
               />
               <Input
-                type="text"
+                type="text" autoFocus
                 placeholder='Enter Element Name'
                 value={element.elementText}
                 onChange={(e) => updateElementName(index, e.target.value)}
@@ -79,7 +79,7 @@ export const ProjectElements = ({
         ))}
 
         {/* Element image input box */}
-        <label htmlFor="element-upload" className='group md:h-[32rem] border-2 border-neutral-300 border-dashed rounded-2xl cursor-pointer'>
+        <label htmlFor="element-upload" className='group md:h-[27rem] border-2 border-neutral-300 border-dashed rounded-2xl cursor-pointer'>
           <div className='w-full h-full flex flex-col gap-10 justify-center items-center'>
             <img src='/src/assets/uploadimg.png' className='rounded-xl group-hover:scale-110 transition-all duration-200 size-20 object-cover' alt="" />
             <p className='text-lg flex items-center gap-2 text-neutral-600'><Upload />Add An Element</p>

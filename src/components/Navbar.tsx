@@ -91,13 +91,13 @@ const Navbar = () => {
                             <li className=' text- hover:cursor-pointer hover:underline'>Team</li>
                         </Link>
                     </ul>
-                      <div className='relative hidden lg:flex-auto md:block mx-4 max-w-96'>
+                      {/* <div className='relative hidden lg:flex-auto md:block mx-4 max-w-96'>
                           <Search className='absolute left-3 top-1/2 -translate-y-1/2 z-10' strokeWidth={1} color='gray' />
                           <Input 
                               className='w-full border-none bg-accent pl-10 transition-all duration-300 focus:max-w-none' 
                               placeholder='Search By Inspiration' 
                           />
-                      </div>
+                      </div> */}
                     <div className='flex items-center justify-end gap-4'>
                         <ModeToggle />
                         {
@@ -122,7 +122,7 @@ const Navbar = () => {
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         }
-                        <Button variant={'outline'} size={'lg'} className='hidden md:block outline-2'>Showcase Project</Button>
+                        <Button variant={'outline'} size={'lg'} onClick={() => navigate('/add-new-project')} className='hidden md:block outline-2'>Showcase Project</Button>
                     </div>
                 </nav>
             </header>

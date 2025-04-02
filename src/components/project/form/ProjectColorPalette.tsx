@@ -16,7 +16,7 @@ export const ProjectColorPalette = ({
 }: ProjectColorPaletteProps) => {
   const [newColor, setNewColor] = useState<string>('#000000');
   const [showColorPicker, setShowColorPicker] = useState<boolean>(false);
-  
+
   // Function to add a new color to the palette
   const addColorToPalette = () => {
     if (newColor && !colorPalette.includes(newColor)) {
@@ -32,35 +32,14 @@ export const ProjectColorPalette = ({
     updatedPalette.splice(index, 1);
     updateColorPalette(updatedPalette);
   };
-  
+
   return (
     <div className='my-20'>
       <h1 className='text-3xl font-semibold mb-10'>Color Palette</h1>
 
-      <div className='flex flex-col gap-6'>
-        {/* Display existing colors */}
-        <div className='flex flex-wrap gap-4'>
-          {colorPalette.map((color, index) => (
-            <div key={index} className='relative group'>
-              <div
-                className='h-16 w-16 rounded-md border shadow-sm cursor-pointer flex items-center justify-center'
-                style={{ backgroundColor: color }}
-              >
-                <span className='text-xs font-mono opacity-0 group-hover:opacity-100 bg-white/80 px-2 py-1 rounded'>
-                  {color}
-                </span>
-              </div>
-              <Button
-                variant="destructive"
-                size={'icon'}
-                className='rounded-full size-6 absolute -top-2 -right-2 opacity-0 group-hover:opacity-100'
-                onClick={() => removeColorFromPalette(index)}
-              >
-                <Trash color='white' size={12} />
-              </Button>
-            </div>
-          ))}
-        </div>
+      <div className='flex items-center justify-between gap-6'>
+
+
 
         {/* Add new color */}
         <div className='flex gap-4 items-center'>
@@ -68,8 +47,8 @@ export const ProjectColorPalette = ({
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
-                  <div 
-                    className='p-3 rounded-xl flex border item-center justify-center' 
+                  <div
+                    className='p-3 rounded-xl flex border item-center justify-center'
                     onClick={() => setShowColorPicker(!showColorPicker)}
                   >
                     <Palette color='purple' />
@@ -93,8 +72,8 @@ export const ProjectColorPalette = ({
             )}
           </div>
 
-          <div className='px-4 flex items-center border justify-center hover:ring-3 focus-within:outline-2 focus-within:outline-blue-400 rounded-md hover:ring-purple-200'>
-            <Input
+          <div className='px-4 flex items-center border justify-center hover:ring-3 focus-within:outline-2 focus-within:outline-blue-400 rounded-xl hover:ring-purple-200'>
+            <input
               type="text"
               value={newColor}
               onChange={(e) => {
@@ -116,6 +95,30 @@ export const ProjectColorPalette = ({
           >
             <Plus size={18} /> Add Color
           </Button>
+        </div>
+
+        {/* Display existing colors */}
+        <div className='flex flex-wrap gap-4'>
+          {colorPalette.map((color, index) => (
+            <div key={index} className='relative group'>
+              <div
+                className='h-30 w-25 rounded-xl border shadow-sm cursor-pointer flex items-center justify-center'
+                style={{ backgroundColor: color }}
+              >
+                <span className='text-xs font-mono opacity-0 group-hover:opacity-100 bg-white/80 px-2 py-1 rounded'>
+                  {color}
+                </span>
+              </div>
+              <Button
+                variant="destructive"
+                size={'icon'}
+                className='rounded-full size-6 absolute -top-2 -right-2 opacity-0 group-hover:opacity-100'
+                onClick={() => removeColorFromPalette(index)}
+              >
+                <Trash color='white' size={12} />
+              </Button>
+            </div>
+          ))}
         </div>
       </div>
     </div>
