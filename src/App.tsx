@@ -8,11 +8,13 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Profile from "./pages/Profile";
 import ProjectPage from "./pages/ProjectPage";
+import ErrorPage from "./pages/Error";
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <RootLayout />,
+      errorElement:<ErrorPage/>,
       children: [
         {
           index: true,
