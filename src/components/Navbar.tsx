@@ -28,18 +28,18 @@ const Navbar = () => {
 
     return (
         <>
-            <header className='w-full bg-transparent backdrop-blur-3xl px-5 md:px-30'>
-                <nav className='flex items-center justify-between  py-4 '>
+            <header className=' border-b w-full bg-transparent backdrop-blur-3xl px-5 md:px-20'>
+                <nav className='flex items-center justify-between  py-3 '>
 
                     <div className='flex items-center gap-3'>
 
                         {/* ----- Hamburger Menu for mobile screen ------ */}
                         <Sheet >
-                            <SheetTrigger className='md:hidden'>
-                                <button className='flex flex-col justify-between items-start gap-3 md:hidden' >
+                            <SheetTrigger className="flex flex-col justify-between items-start gap-3 md:hidden">
+                                {/* <button className='flex flex-col justify-between items-start gap-3 md:hidden' > */}
                                     <span className={`bg-foreground h-[2.6px] w-7 rounded-2xl `}></span>
                                     <span className={`bg-foreground h-[2.5px] w-4 rounded-2xl `}></span>
-                                </button>
+                                {/* </button> */}
                             </SheetTrigger>
 
                             <SheetContent side='left' className='md:hidden'>
@@ -87,14 +87,18 @@ const Navbar = () => {
                         <Link to={'/project'}>
                             <li className=' text- hover:cursor-pointer hover:underline'>Project</li>
                         </Link>
+                        <Link to={'/team'}>
+                            <li className=' text- hover:cursor-pointer hover:underline'>Team</li>
+                        </Link>
                     </ul>
-
-                    <div className='relative hidden md:block w-full md:w-96'>
-                        <Search className='absolute left-3 top-1/2 -translate-y-1/2' strokeWidth={1} color='gray' />
-                        <Input className='border-none bg-accent pl-10' placeholder='Search By Inspiration' />
-                    </div>
-
-                    <div className='flex items-center justify-end gap-2'>
+                      {/* <div className='relative hidden lg:flex-auto md:block mx-4 max-w-96'>
+                          <Search className='absolute left-3 top-1/2 -translate-y-1/2 z-10' strokeWidth={1} color='gray' />
+                          <Input 
+                              className='w-full border-none bg-accent pl-10 transition-all duration-300 focus:max-w-none' 
+                              placeholder='Search By Inspiration' 
+                          />
+                      </div> */}
+                    <div className='flex items-center justify-end gap-4'>
                         <ModeToggle />
                         {
                             !loading && !user && <Button size={'lg'} variant={'link'} onClick={() => navigate('/getstarted')}>Login</Button>
@@ -118,7 +122,7 @@ const Navbar = () => {
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         }
-                        <Button variant={'outline'} size={'lg'} className='hidden md:block outline-2'>Showcase Project</Button>
+                        <Button variant={'outline'} size={'lg'} onClick={() => navigate('/add-new-project')} className='hidden md:block outline-2'>Showcase Project</Button>
                     </div>
                 </nav>
             </header>
