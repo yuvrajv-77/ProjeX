@@ -8,6 +8,9 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Profile from "./pages/Profile";
 import ProjectPage from "./pages/ProjectPage";
+<<<<<<< HEAD
+import ErrorPage from "./pages/Error";
+=======
 import TeamPage from "./pages/TeamPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -15,11 +18,13 @@ import AddNewProject from "./pages/AddNewProject";
 import ProjectSearch from "./pages/SearchPage";
 import EditProfile from "./pages/EditProfile";
 
+>>>>>>> de6efb227f66bcc44be1d82ffbc0db9072d6645b
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <RootLayout />,
+      errorElement:<ErrorPage/>,
       children: [
         {
           index: true,
